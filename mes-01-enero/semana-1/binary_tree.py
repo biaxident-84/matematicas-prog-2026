@@ -158,8 +158,8 @@ def test_binary_tree():
     print(f"Root.left.left: {tree.root.left.left.data}")
     
     print("\nBinaryTree class funciona!")
-    
-    
+   
+# ===================================================================================   
 def ejercicio_dia_2():
     """
     Construir el árbol:
@@ -186,8 +186,95 @@ def ejercicio_dia_2():
     print(f"Root.right,right (F): {tree.root.right.right.data}")
     
     print("\n Ejercicio completado!")
+    
+# ======================================================================================    
+def evaluate_tree(node):
+    
+    if node is None:
+        return 0
+    
+    # Si es numero (hoja) retornarlo
+    if isinstance(node.data, (int,float)):
+        return node.data
+    
+    # si es operador, evaluar hijos recursivamente
+    left_val = evaluate_tree(node.left)
+    right_val = evaluate_tree(node.right)
+    
+    #Aplicar operación
+    if node.data == "+":
+        return left_val + right_val
+    elif node.data == "-":
+        return left_val -right_val
+    elif node.data == "*":
+        return left_val * right_val
+    elif node.data == "/":
+        return left_val / right_val
+
+
+def ejercicio_expresion():
+    print("\n=== Ejercicio expresión ===")
+    
+    tree = BinaryTree("*")
+    node_b = tree.insert_left(tree.root, "+")
+    node_c = tree.insert_right(tree.root, "-")
+    
+    node_d = tree.insert_left(node_b, 5)
+    node_e = tree.insert_right(node_b, 3)
+    
+    node_f = tree.insert_left(node_c, 8)
+    node_g = tree.insert_right(node_c, 2)
+    
+    #Verificar
+    print(f"Root (operator): {tree.root.data}")
+    print(f"Left child of the root : {tree.root.left.data}")
+    print(f"Right child of the root : {tree.root.right.data}")
+    print(f"Leaf 1 : {tree.root.left.left.data}")
+    print(f"Leaf 2 : {tree.root.left.right.data}")
+    print(f"leaf 3 : {tree.root.right.left.data}")
+    print(f"Leaf 4 : {tree.root.right.right.data}")
+    
+    resultado = evaluate_tree(tree.root)
+    print(f"Resultado: {resultado}")
+    print("\n Ejercicio completado")
+        
+
+# =====================================================================   
+def ejercicio_bonus():
+    print("\n=== Ejercicio BÓNUS ===")
+    
+    tree = BinaryTree("-")
+    node_b = tree.insert_left(tree.root,"*")
+    node_c = tree.insert_right(tree.root, "/")
+    
+    node_d = tree.insert_left(node_b, "+")
+    node_e = tree.insert_right(node_b, 4)
+    
+    node_f = tree.insert_left(node_c, 6)
+    node_g = tree.insert_right(node_c, 2)
+    
+    node_h = tree.insert_left(node_d, 2)
+    node_i = tree.insert_right(node_d, 3)
+    
+    #Verificar
+    print(f"Root (operator): {tree.root.data} ")
+    print(f"Left child of the root: {tree.root.left.data}")
+    print(f"Right child of the root: {tree.root.right.data}")
+    print(f"left left child of the root: {tree.root.left.left.data}")
+    print(f"left right child of the root: {tree.root.left.right.data}")
+    print(f"Right left leaf of the root: {tree.root.right.left.data} ")
+    print(f"Right right leaf of the root: {tree.root.right.right.data}")
+    print(f"Left left left leaf of the root: {tree.root.left.left.left.data}")
+    print(f"Left left right leaf of the root: {tree.root.left.left.right.data}")
+    
+    resultado = evaluate_tree(tree.root)
+    print(f"Resultado: {resultado}")
+    print("\n Ejercicio completado!")
+      
        
 if __name__ == "__main__":
     
     test_binary_tree()
     ejercicio_dia_2()
+    ejercicio_expresion()
+    ejercicio_bonus()
